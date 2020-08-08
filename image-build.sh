@@ -7,6 +7,7 @@ declare -a dirs=("eureka-server"
 for dir in "${dirs[@]}"
 do
    cd $dir
+#   ./mvnw clean
    ./mvnw clean package -DskipTests
    cp ../Dockerfile .
    if [[ $dir = "eureka-server" ]]; then
