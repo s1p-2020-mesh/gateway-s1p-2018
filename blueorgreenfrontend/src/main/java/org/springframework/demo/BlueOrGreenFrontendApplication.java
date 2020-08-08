@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+//import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +23,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -50,8 +52,11 @@ public class BlueOrGreenFrontendApplication {
 	private final static Pattern pattern = Pattern.compile(" *; *");
 
 	@RequestMapping("/color")
-	public String color(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
-		String cookies = request.getHeader("cookie");
+//	public String color(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
+	public String color(ServerHttpRequest request, ServerHttpResponse response) throws URISyntaxException {
+
+		//String cookies = request.getHeader("cookie");
+		String cookies = request.getHeaders().getFirst("cookie");
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		if (removeTypeCookie) {
 			cookies = removeCookie(cookies, "type");
@@ -64,7 +69,8 @@ public class BlueOrGreenFrontendApplication {
 		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
 		if(responseEntity.getStatusCode().value() == HttpStatus.TOO_MANY_REQUESTS.value()) {
 			log.warn("Too many requests");
-			response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
+			//response.setStatus(HttpStatus.TOO_MANY_REQUESTS.value());
+			response.setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
 			return "";
 		} else {
 			return responseEntity.getBody();

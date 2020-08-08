@@ -25,4 +25,7 @@ management:
       exposure:
         include: "*"
       base-path: /manage
+  endpoint:
+    shutdown:
+      enabled: true
 

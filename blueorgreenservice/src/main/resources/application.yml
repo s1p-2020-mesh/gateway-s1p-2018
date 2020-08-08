@@ -20,6 +20,13 @@ eureka:
 management:
   security:
     enabled: false
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    shutdown:
+#      enabled: true
 
 security:
   basic:
