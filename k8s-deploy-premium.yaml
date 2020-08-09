@@ -62,10 +62,10 @@ metadata:
   name: yellow
 spec:
   ports:
-    - name: 8181-8181
-      port: 8181
+    - name: 8282-8282
+      port: 8282
       protocol: TCP
-      targetPort: 8181
+      targetPort: 8282
   selector:
     app: yellow
   type: ClusterIP
@@ -80,10 +80,10 @@ metadata:
   name: authgateway
 spec:
   ports:
-    - name: 8383-8383
-      port: 8383
+    - name: 8080-8080
+      port: 8080
       protocol: TCP
-      targetPort: 8383
+      targetPort: 8080
   selector:
     app: authgateway
   type: LoadBalancer
