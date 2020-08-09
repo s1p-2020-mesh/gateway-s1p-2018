@@ -1,9 +1,9 @@
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${LOCALHOST:-localhost}:8761/eureka/
+      defaultZone: http://${EUREKA_HOST:-localhost}:8761/eureka/
   instance:
-    hostname: ${LOCALHOST:-localhost}
+    hostname: ${EUREKA_CLIENT_HOST:-localhost}
     leaseRenewalIntervalInSeconds: 10
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
