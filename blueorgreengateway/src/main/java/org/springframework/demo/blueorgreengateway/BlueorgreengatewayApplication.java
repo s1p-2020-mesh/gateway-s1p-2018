@@ -26,7 +26,12 @@ public class BlueorgreengatewayApplication {
 	@Bean
 	public RouteLocator routeLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route(p -> p.path("/blueorgreen").uri("lb://blueorgreen"))
+				// To demo without circuit breaker (call to slowgreen will wait - slowgreen takes 5s)
+				//.route(p -> p.path("/blueorgreen").uri("lb://blueorgreen"))
+				// To demo with circuit breaker (call to slowgreen will time out after ~1s - validate in Chrome->Developer Tools)
+				//.route(p -> p.path("/blueorgreen").filters(f -> f.hystrix(c -> c.setName("cmd"))).uri("lb://blueorgreen"))
+				// To demo with circuit breaker & fallback (call to slowgreen will return red)
+				.route(p -> p.path("/blueorgreen").filters(f -> f.hystrix(c -> c.setName("cmd").setFallbackUri("forward:/colorfallback"))).uri("lb://blueorgreen"))
 				.route(p -> p.path("/").or().path("/color").or().path("/js/**").uri("lb://blueorgreenfrontend"))
 				.build();
 	}

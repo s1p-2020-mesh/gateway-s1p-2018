@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: yellow
+  name: yellow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: yellow
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: yellow
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: yellow
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: yellow
+            - name: SPRING_PROFILES_ACTIVE
+              value: yellow
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: authgateway
+  name: authgateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authgateway
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: authgateway
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-authgateway
+          name: authgateway
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: authgateway
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: yellow
+  name: yellow
+spec:
+  ports:
+    - name: 8181-8181
+      port: 8181
+      protocol: TCP
+      targetPort: 8181
+  selector:
+    app: yellow
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: authgateway
+  name: authgateway
+spec:
+  ports:
+    - name: 8383-8383
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+  selector:
+    app: authgateway
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    app: frontend
+#  name: frontend
+#spec:
+#  ports:
+#    - name: 9090-9090
+#      port: 9090
+#      protocol: TCP
+#      targetPort: 9090
+#  selector:
+#    app: frontend
+#  type: ClusterIP
+#status:
+#  loadBalancer: {}
