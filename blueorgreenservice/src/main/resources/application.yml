@@ -10,6 +10,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${EUREKA_HOST:-localhost}:8761/eureka/
+    register-with-eureka: ${EUREKA_REGISTER:-true}
+    fetch-registry: ${EUREKA_FETCH_REGISTRY:-true}
   instance:
     hostname: ${EUREKA_CLIENT_HOST:-localhost}
     leaseRenewalIntervalInSeconds: 10
@@ -17,6 +19,7 @@ eureka:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
     # Initially launch the service with the status of OUT_OF_SERVICE
 #    initial-status: out_of_service
+
 
 management:
   security:
