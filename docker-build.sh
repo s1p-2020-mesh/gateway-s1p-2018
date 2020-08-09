@@ -1,3 +1,5 @@
+registry=ciberkleid
+
 declare -a dirs=("eureka-server"
                 "blueorgreenservice"
                 "blueorgreenfrontend"
@@ -16,5 +18,7 @@ do
      docker build . -t $dir --build-arg JAVA_VERSION=8
    fi
    rm Dockerfile
+   docker tag $dir $registry/s1p-2020-mesh-$dir
+   docker push $registry/s1p-2020-mesh-$dir
    cd ..
 done
