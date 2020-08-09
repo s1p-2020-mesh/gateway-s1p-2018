@@ -1,0 +1,103 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apptype: blueorgreen
+    access: basic
+    app: blue
+  name: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apptype: blueorgreen
+      app: blue
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apptype: blueorgreen
+        app: blue
+        access: basic
+    spec:
+      containers:
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+        name: blue
+        env:
+        - name: EUREKA_REGISTER
+          value: "false"
+        - name: EUREKA_FETCH_REGISTRY
+          value: "false"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "blue"
+        - name: SERVER_PORT
+          value: "8080"
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apptype: blueorgreen
+    access: basic
+    app: green
+  name: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apptype: blueorgreen
+      app: green
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apptype: blueorgreen
+        app: green
+        access: basic
+    spec:
+      containers:
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+        name: green
+        env:
+        - name: EUREKA_REGISTER
+          value: "false"
+        - name: EUREKA_FETCH_REGISTRY
+          value: "false"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "green"
+        - name: SERVER_PORT
+          value: "8080"
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    apptype: blueorgreen
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      apptype: blueorgreen
+      app: frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        apptype: blueorgreen
+        app: frontend
+    spec:
+      containers:
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
+        name: frontend
+        env:
+        - name: EUREKA_REGISTER
+          value: "false"
+        - name: EUREKA_FETCH_REGISTRY
+          value: "false"
+        - name: SERVER_PORT
+          value: "8080"
+        resources: {}

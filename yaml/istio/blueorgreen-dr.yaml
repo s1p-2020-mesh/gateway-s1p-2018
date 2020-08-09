@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: blueorgreen
+spec:
+  host: blueorgreen.marygabry.name
+  subsets:
+  - name: basic
+    labels:
+      access: basic

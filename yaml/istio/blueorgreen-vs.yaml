@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: blueorgreen
+spec:
+  hosts:
+  - "blueorgreen.marygabry.name"
+  gateways:
+  - blueorgreen
+  http:
+  - match:
+    - uri:
+        prefix: /blueorgreen
+      route:
+      - destination:
+          port:
+            number: 8080
+          host: blueorgreen
+          subset: basic
+    - uri:
+        prefix: /
+    - uri:
+        prefix: /color
+    - uri:
+        prefix: /js/
+      route:
+      - destination:
+          port:
+            number: 8080
+          host: frontend

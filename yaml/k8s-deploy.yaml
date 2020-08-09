@@ -1,0 +1,270 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: eureka
+  name: eureka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eureka
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: eureka
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-eureka-server
+          name: eureka
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: blue
+  name: blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blue
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blue
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: blue
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: blue
+            - name: SPRING_PROFILES_ACTIVE
+              value: blue
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: green
+  name: green
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: green
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: green
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: green
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: green
+            - name: SPRING_PROFILES_ACTIVE
+              value: green
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: slowgreen
+  name: slowgreen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slowgreen
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: slowgreen
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: slowgreen
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: slowgreen
+            - name: SPRING_PROFILES_ACTIVE
+              value: slowgreen
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
+          name: frontend
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: frontend
+          resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gateway
+  name: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreengateway
+          name: gateway
+          env:
+            - name: EUREKA_HOST
+              value: eureka
+            - name: EUREKA_CLIENT_HOST
+              value: gateway
+          resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: eureka
+  name: eureka
+spec:
+  ports:
+    - name: 8761-8761
+      port: 8761
+      protocol: TCP
+      targetPort: 8761
+  selector:
+    app: eureka
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: blue
+  name: blue
+spec:
+  ports:
+    - name: 8181-8181
+      port: 8181
+      protocol: TCP
+      targetPort: 8181
+  selector:
+    app: blue
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: green
+  name: green
+spec:
+  ports:
+    - name: 7070-7070
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+  selector:
+    app: green
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: slowgreen
+  name: slowgreen
+spec:
+  ports:
+    - name: 7070-7070
+      port: 7070
+      protocol: TCP
+      targetPort: 7070
+  selector:
+    app: slowgreen
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  ports:
+    - name: 9090-9090
+      port: 9090
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    app: frontend
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gateway
+  name: gateway
+spec:
+  ports:
+    - name: 8383-8383
+      port: 8383
+      protocol: TCP
+      targetPort: 8383
+  selector:
+    app: gateway
+  type: ClusterIP
+status:
+  loadBalancer: {}
