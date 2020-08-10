@@ -73,3 +73,7 @@ kubectl create ns $BG_NS
 kubectl label namespace $BG_NS istio-injection=enabled
 istioctl analyze -n $BG_NS
 kubectl -n $BG_NS apply -f istio/
+
+# Get Istio Ingress Host
+echo "istio-ingressgateway hostname:"
+kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
