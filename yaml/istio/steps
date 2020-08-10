@@ -1,0 +1,66 @@
+
+#!/bin/bash
+
+export KUBECONFIG=/Users/marygabry/git/Sp1-2020/gateway-s1p-2018/yaml/kubeconfig-barchetta.yml
+
+curl -L https://istio.io/downloadIstio | sh -
+REL=$(curl -L -s https://api.github.com/repos/istio/istio/releases | \
+                  grep tag_name | sed "s/ *\"tag_name\": *\"\\(.*\\)\",*/\\1/" | \
+                  grep -v -E "(alpha|beta|rc)\.[0-9]$" | sort -t"." -k 1,1 -k 2,2 -k 3,3 -k 4,4 | tail -n 1)
+pushd istio-$REL
+export PATH=$PWD/bin:$PATH
+istioctl install --set profile=demo --set meshConfig.accessLogFile="/dev/stdout"
+kubectl label namespace blueorgreen istio-injection=enabled
+istioctl analyze
+popd
+
+k -n blueorgreen apply -f istio/
+
+export INGRESS_DOMAIN=blueorgreen.marygabry.name
+
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: kiali-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http-kiali
+      protocol: HTTP
+    hosts:
+    - "kiali.blueorgreen.marygabry.name"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: kiali-vs
+  namespace: istio-system
+spec:
+  hosts:
+  - "kiali.blueorgreen.marygabry.name"
+  gateways:
+  - kiali-gateway
+  http:
+  - route:
+    - destination:
+        host: kiali
+        port:
+          number: 20001
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: kiali
+  namespace: istio-system
+spec:
+  host: kiali
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+---
+EOF
