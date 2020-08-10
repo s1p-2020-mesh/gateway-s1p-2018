@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: blueorgreen
-  namespace: blueorgreen
+  namespace: blueorgreen-istio
 spec:
   selector:
     istio: ingressgateway

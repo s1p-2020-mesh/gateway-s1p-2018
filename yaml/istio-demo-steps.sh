@@ -1,23 +1,26 @@
-
 #!/bin/bash
 
-export KUBECONFIG=/Users/marygabry/git/Sp1-2020/gateway-s1p-2018/yaml/kubeconfig-barchetta.yml
+# Config
+if [[ -f $PWD/kubeconfig-cinquecento.yml ]]; then
+    export KUBECONFIG=$PWD/kubeconfig-cinquecento.yml
+else
+    export KUBECONFIG=~/Downloads/kubeconfig-cinquecento.yml
+fi
+export BG_NS=blueorgreen-istio
+export INGRESS_DOMAIN=blueorgreen.marygabry.name
 
+# Install Istio
+kubectl create clusterrolebinding privileged-cluster-role-binding  \
+               --clusterrole=vmware-system-tmc-psp-privileged \
+               --group=system:authenticated
 curl -L https://istio.io/downloadIstio | sh -
 REL=$(curl -L -s https://api.github.com/repos/istio/istio/releases | \
                   grep tag_name | sed "s/ *\"tag_name\": *\"\\(.*\\)\",*/\\1/" | \
                   grep -v -E "(alpha|beta|rc)\.[0-9]$" | sort -t"." -k 1,1 -k 2,2 -k 3,3 -k 4,4 | tail -n 1)
-pushd istio-$REL
-export PATH=$PWD/bin:$PATH
+export PATH=$PWD/istio-$REL/bin:$PATH
 istioctl install --set profile=demo --set meshConfig.accessLogFile="/dev/stdout"
-kubectl label namespace blueorgreen istio-injection=enabled
-istioctl analyze
-popd
 
-k -n blueorgreen apply -f istio/
-
-export INGRESS_DOMAIN=blueorgreen.marygabry.name
-
+# Set up Kiali dashboard
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
@@ -64,3 +67,9 @@ spec:
       mode: DISABLE
 ---
 EOF
+
+# Install bluegreen demo
+kubectl create ns $BG_NS
+kubectl label namespace $BG_NS istio-injection=enabled
+istioctl analyze -n $BG_NS
+kubectl -n $BG_NS apply -f istio/
