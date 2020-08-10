@@ -1,9 +1,12 @@
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: blueorgreen
+  name: blueorgreen-basic
 spec:
-  host: blueorgreen.marygabry.name
+  host: blueorgreen
+  trafficPolicy:
+    tls:
+      mode: DISABLE
   subsets:
   - name: basic
     labels:

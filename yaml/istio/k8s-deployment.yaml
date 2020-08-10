@@ -21,7 +21,7 @@ spec:
         access: basic
     spec:
       containers:
-      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+      - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
         name: blue
         env:
         - name: EUREKA_REGISTER
@@ -57,7 +57,7 @@ spec:
         access: basic
     spec:
       containers:
-      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+      - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
         name: green
         env:
         - name: EUREKA_REGISTER
@@ -74,24 +74,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apptype: blueorgreen
+    apptype: blueorgreen-fe
     app: frontend
   name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apptype: blueorgreen
+      apptype: blueorgreen-fe
       app: frontend
   strategy: {}
   template:
     metadata:
       labels:
-        apptype: blueorgreen
+        apptype: blueorgreen-fe
         app: frontend
     spec:
       containers:
-      - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
+      - image: marygabry1508/s1p-2020-mesh-blueorgreenfrontend
         name: frontend
         env:
         - name: EUREKA_REGISTER

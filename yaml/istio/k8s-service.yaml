@@ -30,7 +30,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    apptype: blueorgreen
     app: frontend
   type: ClusterIP
 status:
