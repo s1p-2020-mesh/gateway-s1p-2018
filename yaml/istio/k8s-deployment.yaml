@@ -84,4 +84,6 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "istio"
+        - name: COLOR_SERVICE_URL
+          value: "blueorgreen.marygabry.name"
         resources: {}
