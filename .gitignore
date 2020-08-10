@@ -26,3 +26,4 @@
 /yaml/istio/istio-1.6.7/
 
 kubeconfig*.yaml
+kubeconfig*.yml
