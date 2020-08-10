@@ -223,10 +223,10 @@ metadata:
   name: slowgreen
 spec:
   ports:
-    - name: 7070-7070
-      port: 7070
+    - name: 6060-6060
+      port: 6060
       protocol: TCP
-      targetPort: 7070
+      targetPort: 6060
   selector:
     app: slowgreen
   type: ClusterIP
