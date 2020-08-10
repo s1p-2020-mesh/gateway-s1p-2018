@@ -23,7 +23,8 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-/yaml/istio/istio-1.6.7/
 
+### Misc ###
+istio-1.6.7/
 kubeconfig*.yaml
 kubeconfig*.yml
