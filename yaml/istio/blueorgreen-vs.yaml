@@ -8,23 +8,26 @@ spec:
   gateways:
   - blueorgreen
   http:
-  - match:
+  - name: blueorgreen-basic
+    match:
     - uri:
         prefix: /blueorgreen
-      route:
-      - destination:
-          port:
-            number: 8080
-          host: blueorgreen
-          subset: basic
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: blueorgreen
+        subset: basic
+  - name: blueorgreen-frontend
+    match:
     - uri:
         prefix: /
     - uri:
         prefix: /color
     - uri:
         prefix: /js/
-      route:
-      - destination:
-          port:
-            number: 8080
-          host: frontend
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: frontend
