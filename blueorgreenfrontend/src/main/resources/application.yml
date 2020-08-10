@@ -15,8 +15,6 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${EUREKA_HOST:-localhost}:8761/eureka/
-    register-with-eureka: ${EUREKA_REGISTER:-true}
-    fetch-registry: ${EUREKA_FETCH_REGISTRY:-true}
   instance:
     hostname: ${EUREKA_CLIENT_HOST:-localhost}
     leaseRenewalIntervalInSeconds: 10

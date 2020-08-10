@@ -21,17 +21,11 @@ spec:
         access: basic
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
         name: blue
         env:
-        - name: EUREKA_REGISTER
-          value: "false"
-        - name: EUREKA_FETCH_REGISTRY
-          value: "false"
         - name: SPRING_PROFILES_ACTIVE
-          value: "blue"
-        - name: SERVER_PORT
-          value: "8080"
+          value: "blue,istio"
         resources: {}
 ---
 apiVersion: apps/v1
@@ -57,17 +51,11 @@ spec:
         access: basic
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
         name: green
         env:
-        - name: EUREKA_REGISTER
-          value: "false"
-        - name: EUREKA_FETCH_REGISTRY
-          value: "false"
         - name: SPRING_PROFILES_ACTIVE
-          value: "green"
-        - name: SERVER_PORT
-          value: "8080"
+          value: "green,istio"
         resources: {}
 ---
 apiVersion: apps/v1
@@ -91,13 +79,9 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-blueorgreenfrontend
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
         name: frontend
         env:
-        - name: EUREKA_REGISTER
-          value: "false"
-        - name: EUREKA_FETCH_REGISTRY
-          value: "false"
-        - name: SERVER_PORT
-          value: "8080"
+        - name: SPRING_PROFILES_ACTIVE
+          value: "istio"
         resources: {}

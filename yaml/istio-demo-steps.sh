@@ -10,9 +10,10 @@ export BG_NS=blueorgreen-istio
 export INGRESS_DOMAIN=blueorgreen.marygabry.name
 
 # Install Istio
-kubectl create clusterrolebinding privileged-cluster-role-binding  \
-               --clusterrole=vmware-system-tmc-psp-privileged \
-               --group=system:authenticated
+# To enable privileged containers for a service account, you can use the following command:
+#kubectl create rolebinding privileged-role-binding --clusterrole=vmware-system-tmc-psp-privileged --user=system:serviceaccount:<namespace>:<service-account>
+# OR to enable privileged containers for the entire cluster, you can use the following command:
+kubectl create clusterrolebinding privileged-cluster-role-binding --clusterrole=vmware-system-tmc-psp-privileged --group=system:authenticated
 curl -L https://istio.io/downloadIstio | sh -
 REL=$(curl -L -s https://api.github.com/repos/istio/istio/releases | \
                   grep tag_name | sed "s/ *\"tag_name\": *\"\\(.*\\)\",*/\\1/" | \
