@@ -27,6 +27,7 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: "blue,istio"
         resources: {}
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,6 +58,7 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: "green,istio"
         resources: {}
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -85,5 +87,6 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: "istio"
         - name: COLOR_SERVICE_URL
-          value: "blueorgreen.marygabry.name"
+          value: "http://blueorgreen.marygabry.name"
         resources: {}
+        imagePullPolicy: Always
