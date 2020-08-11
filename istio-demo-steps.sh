@@ -73,7 +73,7 @@ EOF
 kubectl create ns $BG_NS
 kubectl label namespace $BG_NS istio-injection=enabled
 istioctl analyze -n $BG_NS
-kubectl -n $BG_NS apply -f istio/
+kubectl -n $BG_NS apply -f yaml/istio/
 
 # Get Istio Ingress Host
 echo "istio-ingressgateway hostname:"
