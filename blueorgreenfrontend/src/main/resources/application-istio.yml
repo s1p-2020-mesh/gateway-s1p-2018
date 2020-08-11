@@ -5,5 +5,30 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    enabled: false
 
 colorServiceUrl: ${COLOR_SERVICE_URL}
+
+ribbon:
+  eureka:
+    enabled: false
+  http:
+    client:
+      enabled: true
+
+#spring:
+#  cloud:
+#    kubernetes:
+#      ribbon:
+#        enabled: false
+
+
+
+
+
+
+
+
+
+
+

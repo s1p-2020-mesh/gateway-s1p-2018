@@ -6,7 +6,8 @@ import java.net.URISyntaxException;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletResponse;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
+//import org.springframework.http.server.ServerHttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -36,6 +39,9 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class BlueOrGreenFrontendApplication {
 	private static final Logger log = LoggerFactory.getLogger(BlueOrGreenFrontendApplication.class);
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
 
 	@Autowired
 	RestTemplate rest;
