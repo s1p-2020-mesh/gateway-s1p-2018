@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: blueorgreen-basic
+  name: blueorgreen
 spec:
   host: blueorgreen
   trafficPolicy:
@@ -10,4 +10,8 @@ spec:
   subsets:
   - name: basic
     labels:
+      app: blueorgreen
       access: basic
+  - name: premium
+    labels:
+      app: blueorgreen

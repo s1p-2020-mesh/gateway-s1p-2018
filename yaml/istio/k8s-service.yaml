@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    apptype: blueorgreen
+    app: blueorgreen
   name: blueorgreen
 spec:
   ports:
@@ -11,7 +11,7 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    access: basic
+    app: blueorgreen
   type: ClusterIP
 status:
   loadBalancer: {}
@@ -20,35 +20,17 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    apptype: blueorgreen
     app: frontend
+    apptype: blueorgreen-fe
   name: frontend
 spec:
   ports:
-  - name: 8080-9090-blueorgreen
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
+    - name: 8080-9090-blueorgreen
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: frontend
-  type: ClusterIP
-status:
-  loadBalancer: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    apptype: blueorgreen
-  name: blueorgreen-premium
-spec:
-  ports:
-  - name: 8080-8181-blueorgreen
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    apptype: blueorgreen
   type: ClusterIP
 status:
   loadBalancer: {}

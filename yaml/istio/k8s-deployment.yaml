@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apptype: blueorgreen
+    app: blueorgreen
+    apptype: blue
     access: basic
-    app: blue
   name: blue
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apptype: blueorgreen
-      app: blue
+      app: blueorgreen
+      apptype: blue
   strategy: {}
   template:
     metadata:
       labels:
-        apptype: blueorgreen
-        app: blue
+        app: blueorgreen
+        apptype: blue
         access: basic
     spec:
       containers:
@@ -33,22 +33,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apptype: blueorgreen
+    app: blueorgreen
+    apptype: green
     access: basic
-    app: green
   name: green
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apptype: blueorgreen
-      app: green
+      app: blueorgreen
+      apptype: green
   strategy: {}
   template:
     metadata:
       labels:
-        apptype: blueorgreen
-        app: green
+        app: blueorgreen
+        apptype: green
         access: basic
     spec:
       containers:
@@ -64,21 +64,50 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    apptype: blueorgreen-fe
+    app: blueorgreen
+    apptype: yellow
+  name: yellow
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blueorgreen
+      apptype: yellow
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blueorgreen
+        apptype: yellow
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: yellow
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "yellow,istio"
+          resources: {}
+          imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
     app: frontend
+    apptype: blueorgreen-fe
   name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      apptype: blueorgreen-fe
       app: frontend
+      apptype: blueorgreen-fe
   strategy: {}
   template:
     metadata:
       labels:
-        apptype: blueorgreen-fe
         app: frontend
+        apptype: blueorgreen-fe
     spec:
       containers:
       - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
