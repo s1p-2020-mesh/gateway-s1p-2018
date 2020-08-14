@@ -37,8 +37,8 @@ spec:
     - uri:
         prefix: /blueorgreen
       headers:
-        type:
-          exact: premium
+        cookie:
+          exact: type=premium
     route:
     - destination:
         port:
