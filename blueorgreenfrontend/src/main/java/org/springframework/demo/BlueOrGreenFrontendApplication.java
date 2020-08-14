@@ -61,12 +61,14 @@ public class BlueOrGreenFrontendApplication {
 	@RequestMapping("/color")
 	public String color(HttpServletRequest request, HttpServletResponse response) throws URISyntaxException {
 		String cookies = request.getHeader("cookie");
+		log.info("Received request for /color with cookie=[" + cookies + "]");
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		if (removeTypeCookie) {
 			cookies = removeCookie(cookies, "type");
 		}
 		if (cookies != null && cookies.length() > 0) {
-				headers.set("cookie", cookies);
+			log.info("Setting header cookie=[" + cookies + "]");
+			headers.set("cookie", cookies);
 		}
 
 		RequestEntity requestEntity = new RequestEntity(headers, HttpMethod.GET, new URI(colorServiceUrl + "/blueorgreen"));
