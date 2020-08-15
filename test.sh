@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ $1 == "all" ]
+then
+kubectl delete -f yaml/istio/
+kubectl apply -f yaml/istio/
+kubectl rollout status deployment/yellow
+fi
+
+
 echo "basic"
 for i in {1..6}; do curl --location --request GET "http://blueorgreen.marygabry.name/blueorgreen" --header 'cookie: type=none'; echo; done
 

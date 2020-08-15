@@ -60,7 +60,7 @@ spec:
         prefix: /blueorgreen
       headers:
         cookie:
-          regex: ^[.=;]*type=premium;[.=;]*$
+          regex: "^(.*?;)?(type=premium)(;.*)?$"
     route:
     - destination:
         port:
