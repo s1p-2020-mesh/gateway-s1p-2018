@@ -16,7 +16,7 @@ spec:
         app: eureka
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-eureka-server
+        - image: marygabry1508/s1p-2020-mesh-eureka-server
           name: eureka
           resources: {}
 ---
@@ -38,7 +38,7 @@ spec:
         app: blue
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
           name: blue
           env:
             - name: EUREKA_HOST
@@ -67,7 +67,7 @@ spec:
         app: green
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
           name: green
           env:
             - name: EUREKA_HOST
@@ -96,7 +96,7 @@ spec:
         app: slowgreen
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
           name: slowgreen
           env:
             - name: EUREKA_HOST
@@ -125,7 +125,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
+        - image: marygabry1508/s1p-2020-mesh-blueorgreenfrontend
           name: frontend
           env:
             - name: EUREKA_HOST
@@ -152,7 +152,7 @@ spec:
         app: gateway
     spec:
       containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreengateway
+        - image: marygabry1508/s1p-2020-mesh-blueorgreengateway
           name: gateway
           env:
             - name: EUREKA_HOST

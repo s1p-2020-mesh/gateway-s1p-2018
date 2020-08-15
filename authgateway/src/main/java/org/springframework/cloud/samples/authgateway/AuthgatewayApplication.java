@@ -18,18 +18,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class AuthgatewayApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AuthgatewayApplication.class, args);
 	}
 
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@Value("${colorApplicationUrl:lb://blueorgreengateway}")
+	private String colorApplicationUrl;
+
 	@Bean
 	public RouteLocator routeLocator(RouteLocatorBuilder builder) {
 		return builder.routes()
-				.route(p -> p.path("/**").uri("lb://blueorgreengateway"))
+				.route(p -> p.path("/**").uri(colorApplicationUrl))
 				.build();
 	}
 

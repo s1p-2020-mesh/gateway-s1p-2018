@@ -49,7 +49,7 @@ public class BlueOrGreenFrontendApplication {
 	@Value("${removeTypeCookie:true}")
 	private boolean removeTypeCookie;
 
-	@Value("${colorServiceUrl:http://blueorgreengateway}")
+	@Value("${colorServiceUrl:http://blueorgreengateway/blueorgreen}")
 	private String colorServiceUrl;
 
 	public static void main(String[] args) {
@@ -71,7 +71,7 @@ public class BlueOrGreenFrontendApplication {
 			headers.set("cookie", cookies);
 		}
 
-		RequestEntity requestEntity = new RequestEntity(headers, HttpMethod.GET, new URI(colorServiceUrl + "/blueorgreen"));
+		RequestEntity requestEntity = new RequestEntity(headers, HttpMethod.GET, new URI(colorServiceUrl));
 		ResponseEntity<String> responseEntity = rest.exchange(requestEntity, String.class);
 		if(responseEntity.getStatusCode().value() == HttpStatus.TOO_MANY_REQUESTS.value()) {
 			log.warn("Too many requests");

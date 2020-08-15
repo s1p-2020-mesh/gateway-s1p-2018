@@ -1,6 +1,28 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
+  name: blueorgreen-gw
+spec:
+  hosts:
+  - "blueorgreen.marygabry.name"
+  gateways:
+  - blueorgreen
+  http:
+  - name: blueorgreen-authgateway
+    match:
+    - uri:
+        prefix: /login
+    - uri:
+        prefix: /logout
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: authgateway
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
   name: blueorgreen-fe
 spec:
   hosts:

@@ -5,3 +5,13 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    enabled: false
+
+colorApplicationUrl: ${COLOR_APPLICATION_URL}
+
+ribbon:
+  eureka:
+    enabled: false
+  http:
+    client:
+      enabled: true

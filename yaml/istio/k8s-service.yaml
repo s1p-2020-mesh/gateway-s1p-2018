@@ -34,3 +34,22 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: authgateway
+    apptype: blueorgreen-gw
+  name: authgateway
+spec:
+  ports:
+  - name: 8080-9090-blueorgreen
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: authgateway
+  type: ClusterIP
+status:
+  loadBalancer: {}
