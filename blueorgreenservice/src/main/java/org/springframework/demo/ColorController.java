@@ -24,6 +24,8 @@ public class ColorController {
 			return Color.BLUE;
 		} else if(Color.YELLOW.getId().equalsIgnoreCase(colorProperties.getColor())) {
 			return Color.YELLOW;
+		} else if(Color.ORANGE.getId().equalsIgnoreCase(colorProperties.getColor())) {
+			return Color.ORANGE;
 		}
 		return Color.GREEN;
 	}
@@ -32,6 +34,7 @@ public class ColorController {
 		public static final Color GREEN = new Color("green");
 		public static final Color BLUE = new Color("blue");
 		public static final Color YELLOW = new Color("yellow");
+		public static final Color ORANGE = new Color("orange");
 		private String id;
 
 		public Color(){}

@@ -16,17 +16,17 @@ do
   docker push $registry/s1p-2020-mesh-$app
 done
 
-for app in "${apps[@]}"
-do
-  if [[ $app = "blueorgreengateway" ]]; then
-    echo "Tagging $app as $gwTag. Continue? [yN]: "
-    read cont
-    if [ $cont = "Y" ] || [ $cont = "y" ]; then
-      docker tag $app $app:$gwTag
-      docker tag $app $registry/s1p-2020-mesh-$app:$gwTag
-      docker push $registry/s1p-2020-mesh-$app:$gwTag
-    else
-      echo "Skipping tagging as $app:$gwTag"
-    fi
-  fi
-done
+#for app in "${apps[@]}"
+#do
+#  if [[ $app = "blueorgreengateway" ]]; then
+##    echo "Tagging $app as $gwTag. Continue? [yN]: "
+##    read cont
+#    if [ $cont = "Y" ] || [ $cont = "y" ]; then
+#      docker tag $app $app:$gwTag
+#      docker tag $app $registry/s1p-2020-mesh-$app:$gwTag
+#      docker push $registry/s1p-2020-mesh-$app:$gwTag
+#    else
+#      echo "Skipping tagging as $app:$gwTag"
+#    fi
+#  fi
+#done

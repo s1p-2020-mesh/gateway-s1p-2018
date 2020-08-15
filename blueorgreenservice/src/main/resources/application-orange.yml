@@ -1,0 +1,4 @@
+color: orange
+slow: true
+server:
+  port: 6161
