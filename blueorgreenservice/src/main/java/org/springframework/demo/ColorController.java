@@ -1,5 +1,7 @@
 package org.springframework.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ColorController {
 
+	private static final Logger log = LoggerFactory.getLogger(ColorController.class);
+
 	private ColorProperties colorProperties;
 
 	public  ColorController(ColorProperties colorProperties) {
@@ -17,9 +21,12 @@ public class ColorController {
 
 	@RequestMapping
 	public Color color() throws InterruptedException {
+		log.info("Got request for " + colorProperties.getColor());
 		if(colorProperties.isSlow()) {
+			log.info("Sleeping...");
 			Thread.sleep(5000);
 		}
+		log.info("Sending response for " + colorProperties.getColor());
 		if(Color.BLUE.getId().equalsIgnoreCase(colorProperties.getColor())) {
 			return Color.BLUE;
 		} else if(Color.YELLOW.getId().equalsIgnoreCase(colorProperties.getColor())) {
