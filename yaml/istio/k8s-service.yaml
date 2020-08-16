@@ -53,21 +53,21 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: blueorgreen
-  name: orange
-spec:
-  ports:
-  - name: 8080-8181-blueorgreen
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app: orange
-  type: ClusterIP
-status:
-  loadBalancer: {}
+#---
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    app: blueorgreen
+#  name: orange
+#spec:
+#  ports:
+#  - name: 8080-8181-blueorgreen
+#    port: 8080
+#    protocol: TCP
+#    targetPort: 8080
+#  selector:
+#    app: orange
+#  type: ClusterIP
+#status:
+#  loadBalancer: {}
