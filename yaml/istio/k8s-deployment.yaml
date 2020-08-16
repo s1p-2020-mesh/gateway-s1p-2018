@@ -25,7 +25,9 @@ spec:
         name: blue
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: "blue,istio"
+          value: "istio"
+        - name: COLOR
+          value: "blue"
         resources: {}
         imagePullPolicy: Always
 ---
@@ -56,7 +58,9 @@ spec:
         name: green
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: "green,istio"
+          value: "istio"
+        - name: COLOR
+          value: "green"
         resources: {}
         imagePullPolicy: Always
 ---
@@ -87,7 +91,9 @@ spec:
         name: orange
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: "orange,istio"
+          value: "istio"
+        - name: COLOR
+          value: "orange"
         - name: SLOW
           value: "true"
         resources: {}
@@ -117,8 +123,10 @@ spec:
         - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
           name: yellow
           env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "yellow,istio"
+          - name: SPRING_PROFILES_ACTIVE
+            value: "istio"
+          - name: COLOR
+            value: "yellow"
           resources: {}
           imagePullPolicy: Always
 ---
