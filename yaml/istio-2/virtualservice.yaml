@@ -31,6 +31,7 @@ spec:
   - springone-gw
   http:
   - name: blueorgreen-fe
+    timeout: 750ms
     match:
     - uri:
         prefix: /
@@ -63,9 +64,8 @@ spec:
         port:
           number: 8080
         host: blueorgreen-svc
-      timeout: 0.5s
     fault:
       delay:
-        fixedDelay: 900ms
+        fixedDelay: 950ms
         percentage:
           value: 100
