@@ -1,0 +1,71 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: blueorgreen-gw
+spec:
+  hosts:
+  - "blueorgreen.springone.coraiberkleid.xyz"
+  gateways:
+  - springone-gw
+  http:
+  - name: blueorgreen-gw
+    match:
+    - uri:
+        prefix: /login
+    - uri:
+        prefix: /logout
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: blueorgreen-gw
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: blueorgreen-fe
+spec:
+  hosts:
+  - "blueorgreen.springone.coraiberkleid.xyz"
+  gateways:
+  - springone-gw
+  http:
+  - name: blueorgreen-fe
+    match:
+    - uri:
+        prefix: /
+    - uri:
+        prefix: /js
+    - uri:
+        prefix: /color
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: blueorgreen-fe
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: blueorgreen-svc
+spec:
+  hosts:
+  - "blueorgreen.springone.coraiberkleid.xyz"
+  gateways:
+  - springone-gw
+  http:
+  - name: blueorgreen-svc
+    match:
+    - uri:
+        prefix: /blueorgreen
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: blueorgreen-svc
+      timeout: 0.5s
+    fault:
+      delay:
+        fixedDelay: 900ms
+        percentage:
+          value: 100

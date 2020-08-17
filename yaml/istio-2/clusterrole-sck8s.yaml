@@ -1,0 +1,24 @@
+# References:
+# https://medium.com/@nieldw/rbac-and-spring-cloud-kubernetes-847dd0f245e4
+# https://stackoverflow.com/questions/54654391/spring-cloud-kubernetes-what-are-cluster-reader-permissions
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-read-role
+rules:
+  - apiGroups: [""] # "" indicates the core API group
+    resources: ["services", "pods", "configmaps", "endpoints"]
+    verbs: ["get", "watch", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-read-rolebinding
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: blueorgreen-istio-2
+roleRef:
+  kind: ClusterRole
+  name: cluster-read-role
+  apiGroup: rbac.authorization.k8s.io

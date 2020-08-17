@@ -2,5 +2,5 @@ spring:
   cloud:
     kubernetes:
       enabled: true
-      ribbon:
-        enabled: false
+#      ribbon:
+#        enabled: false

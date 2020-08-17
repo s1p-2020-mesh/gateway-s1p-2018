@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: blueorgreen-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blueorgreen-fe
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blueorgreen-fe
+    spec:
+      containers:
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
+        name: app
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "istio"
+        - name: COLOR_SERVICE_URL
+          value: "http://blueorgreen.springone.coraiberkleid.xyz/blueorgreen"
+#          value: "http://blueorgreen-svc:8080"
+#          value: "http://blueorgreen-svc.blueorgreen-istio-2.svc.cluster.local:8080"
+        resources: {}
+        imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authgateway
+  labels:
+    app: blueorgreen-gw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blueorgreen-gw
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blueorgreen-gw
+    spec:
+      containers:
+      - image: ciberkleid/s1p-2020-mesh-authgateway
+        name: app
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "istio"
+        - name: COLOR_APPLICATION_URL
+          value: "http://blueorgreen.springone.coraiberkleid.xyz"
+        resources: {}
+        imagePullPolicy: Always

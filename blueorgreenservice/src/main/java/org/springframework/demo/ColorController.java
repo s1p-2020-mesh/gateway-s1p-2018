@@ -23,8 +23,8 @@ public class ColorController {
 	public Color color() throws InterruptedException {
 		log.info("Got request for " + colorProperties.getColor());
 		if(colorProperties.isSlow()) {
-			log.info("Sleeping...");
-			Thread.sleep(5000);
+			log.info("Sleeping for " + colorProperties.getDelay() + "ms...");
+			Thread.sleep(colorProperties.getDelay());
 		}
 		log.info("Sending response for " + colorProperties.getColor());
 		if(Color.BLUE.getId().equalsIgnoreCase(colorProperties.getColor())) {
