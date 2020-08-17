@@ -15,20 +15,5 @@ ribbon:
   http:
     client:
       enabled: true
-
-#spring:
-#  cloud:
-#    kubernetes:
-#      ribbon:
-#        enabled: false
-
-
-
-
-
-
-
-
-
-
-
+  ReadTimeout: 60000
+  ConnectTimeout: 30000

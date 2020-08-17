@@ -31,7 +31,7 @@ spec:
   - springone-gw
   http:
   - name: blueorgreen-fe
-    timeout: 750ms
+    #timeout: 6000ms
     match:
     - uri:
         prefix: /
@@ -55,7 +55,20 @@ spec:
   gateways:
   - springone-gw
   http:
-  - name: blueorgreen-svc
+  - name: blueorgreen-svc-premium
+    match:
+      - uri:
+          prefix: /blueorgreen
+        headers:
+          cookie:
+            regex: "^(.*?;)?(type=premium)(;.*)?$"
+    route:
+      - destination:
+          port:
+            number: 8080
+          host: blueorgreen-svc
+          subset: premium
+  - name: blueorgreen-svc-basic
     match:
     - uri:
         prefix: /blueorgreen
@@ -64,8 +77,9 @@ spec:
         port:
           number: 8080
         host: blueorgreen-svc
+        subset: basic
     fault:
       delay:
-        fixedDelay: 950ms
+        fixedDelay: 3000ms
         percentage:
           value: 100

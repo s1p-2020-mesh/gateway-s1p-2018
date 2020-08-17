@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: blueorgreen-dr
+spec:
+  host: blueorgreen-svc
+  trafficPolicy:
+    tls:
+      mode: DISABLE
+  subsets:
+  - name: basic
+    labels:
+      app: blueorgreen-svc
+#      access: basic
+  - name: premium
+    labels:
+      app: blueorgreen-svc
