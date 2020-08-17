@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker stop eureka
 docker stop blue
 docker stop green

@@ -27,7 +27,7 @@ spec:
         - name: COLOR
           value: "blue"
         - name: SLOW
-          value: "true"
+          value: "false"
         - name: DELAY
           value: "5000"
         resources: {}
@@ -62,7 +62,7 @@ spec:
             - name: COLOR
               value: "green"
             - name: SLOW
-              value: "true"
+              value: "false"
             - name: DELAY
               value: "5000"
           resources: {}
@@ -97,7 +97,7 @@ spec:
             - name: COLOR
               value: "orange"
             - name: SLOW
-              value: "true"
+              value: "false"
             - name: DELAY
               value: "5000"
           resources: {}
@@ -132,7 +132,7 @@ spec:
             - name: COLOR
               value: "yellow"
             - name: SLOW
-              value: "true"
+              value: "false"
             - name: DELAY
               value: "5000"
           resources: {}

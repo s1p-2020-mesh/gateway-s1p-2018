@@ -31,7 +31,7 @@ spec:
   - springone-gw
   http:
   - name: blueorgreen-fe
-    #timeout: 6000ms
+    timeout: 1000ms
     match:
     - uri:
         prefix: /
@@ -80,6 +80,6 @@ spec:
         subset: basic
     fault:
       delay:
-        fixedDelay: 3000ms
+        fixedDelay: 5000ms
         percentage:
-          value: 100
+          value: 50

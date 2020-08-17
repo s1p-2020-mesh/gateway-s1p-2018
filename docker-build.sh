@@ -1,3 +1,5 @@
+#!/bin/bash
+
 declare -a apps=("eureka-server"
                 "blueorgreenservice"
                 "blueorgreenfrontend"

@@ -12,6 +12,8 @@
                 }, function errorCallback(response) {
                     if(response.status == 429) {
                         $window.alert('You have been rate limited!!!!')
+                    } else if(response.status == 504) {
+                        $scope.color = {id: "red"};
                     }
                 });
             });
