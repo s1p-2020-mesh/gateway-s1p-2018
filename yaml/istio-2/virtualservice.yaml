@@ -31,7 +31,7 @@ spec:
   - springone-gw
   http:
   - name: blueorgreen-fe
-    timeout: 1000ms
+    timeout: 1200ms
     match:
     - uri:
         prefix: /
@@ -82,4 +82,4 @@ spec:
       delay:
         fixedDelay: 5000ms
         percentage:
-          value: 50
+          value: 30

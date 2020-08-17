@@ -5,6 +5,7 @@ metadata:
   labels:
     app: blueorgreen-svc
     apptype: blue
+    access: basic
 spec:
   replicas: 1
   selector:
@@ -17,6 +18,7 @@ spec:
       labels:
         app: blueorgreen-svc
         apptype: blue
+        access: basic
     spec:
       containers:
       - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
@@ -40,6 +42,7 @@ metadata:
   labels:
     app: blueorgreen-svc
     apptype: green
+    access: basic
 spec:
   replicas: 1
   selector:
@@ -52,6 +55,7 @@ spec:
       labels:
         app: blueorgreen-svc
         apptype: green
+        access: basic
     spec:
       containers:
         - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
@@ -67,41 +71,41 @@ spec:
               value: "5000"
           resources: {}
           imagePullPolicy: Always
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: orange
-  labels:
-    app: blueorgreen-svc
-    apptype: orange
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: blueorgreen-svc
-      apptype: orange
-  strategy: {}
-  template:
-    metadata:
-      labels:
-        app: blueorgreen-svc
-        apptype: orange
-    spec:
-      containers:
-        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
-          name: app
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "istio"
-            - name: COLOR
-              value: "orange"
-            - name: SLOW
-              value: "false"
-            - name: DELAY
-              value: "5000"
-          resources: {}
-          imagePullPolicy: Always
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: orange
+#  labels:
+#    app: blueorgreen-svc
+#    apptype: orange
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: blueorgreen-svc
+#      apptype: orange
+#  strategy: {}
+#  template:
+#    metadata:
+#      labels:
+#        app: blueorgreen-svc
+#        apptype: orange
+#    spec:
+#      containers:
+#        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+#          name: app
+#          env:
+#            - name: SPRING_PROFILES_ACTIVE
+#              value: "istio"
+#            - name: COLOR
+#              value: "orange"
+#            - name: SLOW
+#              value: "false"
+#            - name: DELAY
+#              value: "5000"
+#          resources: {}
+#          imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
