@@ -1,35 +1,24 @@
 #!/bin/bash
 
+#!/bin/bash
+
 if [[ $1 == "cora" ]]; then
-
-  sed -i '' 's/marygabry1508/ciberkleid/g' docker-push.sh
-  sed -i '' 's/marygabry\.name/springone\.coraiberkleid\.xyz/g' test.sh
-  sed -i '' 's/marygabry\.name/springone\.coraiberkleid\.xyz/g' istio-demo-steps.sh
-
-  pushd yaml/eureka
-  sed -i '' 's/marygabry1508/ciberkleid/g' *.yaml
-  popd
-
-  pushd yaml/istio
-  sed -i '' 's/marygabry1508/ciberkleid/g' *.yaml
-  sed -i '' 's/marygabry\.name/springone\.coraiberkleid\.xyz/g' *.yaml
-  popd
-
+  FROM_REG=marygabry1508
+  TO_REG=ciberkleid
+  FROM_DMN=marygabry\.name
+  TO_DMN=springone\.coraiberkleid\.xyz
 else
-
-  sed -i '' 's/ciberkleid/marygabry1508/g' docker-push.sh
-  sed -i '' 's/springone\.coraiberkleid\.xyz/marygabry\.name/g' test.sh
-  sed -i '' 's/springone\.coraiberkleid\.xyz/marygabry\.name/g' istio-demo-steps.sh
-
-  pushd yaml/eureka
-  sed -i '' 's/ciberkleid/marygabry1508/g' *.yaml
-  popd
-
-  pushd yaml/istio
-  sed -i '' 's/ciberkleid/marygabry1508/g' *.yaml
-  sed -i '' 's/springone\.coraiberkleid\.xyz/marygabry\.name/g' *.yaml
-  popd
-
+  FROM_REG=ciberkleid
+  TO_REG=marygabry1508
+  FROM_DMN=springone\.coraiberkleid\.xyz
+  TO_DMN=marygabry\.name
 fi
 
+find ./yaml -type f \( -name "*.yaml" -o -name "*.yml" \) -print0 | xargs -0 sed -i '' "s/${FROM_REG}/${TO_REG}/g"
+find ./yaml -type f \( -name "*.yaml" -o -name "*.yml" \) -print0 | xargs -0 sed -i '' "s/${FROM_DMN}/${TO_DMN}/g"
 
+sed -i '' "s/${FROM_REG}/${TO_REG}/g" docker-push.sh
+
+sed -i '' "s/${FROM_DMN}/${TO_DMN}/g" test.sh
+sed -i '' "s/${FROM_DMN}/${TO_DMN}/g" test-2.sh
+sed -i '' "s/${FROM_DMN}/${TO_DMN}/g" istio-demo-steps.sh
