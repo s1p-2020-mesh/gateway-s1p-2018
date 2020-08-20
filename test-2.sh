@@ -19,10 +19,10 @@ then
 fi
 
 echo "basic"
-for i in {1..12}; do time curl --location --request GET "http://blueorgreen.springone.coraiberkleid.xyz/blueorgreen" --header "cookie: type="; echo; done
+for i in {1..12}; do time curl --location --request GET "http://blueorgreen.marygabry.name/blueorgreen" --header "cookie: type="; echo; done
 
 #echo "premium"
-#for i in {1..6}; do curl --location --request GET "http://blueorgreen.springone.coraiberkleid.xyz/blueorgreen" ; echo; done
+#for i in {1..6}; do curl --location --request GET "http://blueorgreen.marygabry.name/blueorgreen" ; echo; done
 #
 #echo "premium-2"
-#for i in {1..6}; do curl --location --request GET "http://blueorgreen.springone.coraiberkleid.xyz/blueorgreen" ; echo; done
+#for i in {1..6}; do curl --location --request GET "http://blueorgreen.marygabry.name/blueorgreen" ; echo; done

@@ -4,7 +4,7 @@ metadata:
   name: blueorgreen-gw
 spec:
   hosts:
-  - "blueorgreen.springone.coraiberkleid.xyz"
+  - "blueorgreen.marygabry.name"
   gateways:
   - springone-gw
   http:
@@ -26,7 +26,7 @@ metadata:
   name: blueorgreen-fe
 spec:
   hosts:
-  - "blueorgreen.springone.coraiberkleid.xyz"
+  - "blueorgreen.marygabry.name"
   gateways:
   - springone-gw
   http:
@@ -51,7 +51,7 @@ metadata:
   name: blueorgreen-svc
 spec:
   hosts:
-  - "blueorgreen.springone.coraiberkleid.xyz"
+  - "blueorgreen.marygabry.name"
   gateways:
   - springone-gw
   http:
