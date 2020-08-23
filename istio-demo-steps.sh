@@ -7,7 +7,7 @@ else
     export KUBECONFIG=~/Downloads/kubeconfig-cinquecento.yml
 fi
 export BG_NS=blueorgreen-istio
-export INGRESS_DOMAIN=blueorgreen.marygabry.name
+export INGRESS_DOMAIN=blueorgreen.springone.coraiberkleid.xyz
 
 # Install Istio
 # To enable privileged containers for a service account, you can use the following command:
@@ -37,7 +37,7 @@ spec:
       name: http-kiali
       protocol: HTTP
     hosts:
-    - "kiali.blueorgreen.marygabry.name"
+    - "kiali.blueorgreen.springone.coraiberkleid.xyz"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -46,7 +46,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - "kiali.blueorgreen.marygabry.name"
+  - "kiali.blueorgreen.springone.coraiberkleid.xyz"
   gateways:
   - kiali-gateway
   http:

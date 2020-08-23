@@ -16,15 +16,15 @@ spec:
         app: blueorgreen-fe
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-blueorgreenfrontend
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenfrontend
         name: app
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "istio"
         - name: COLOR_SERVICE_URL
-          value: "http://blueorgreen.marygabry.name/blueorgreen"
+          value: "http://blueorgreen.springone.coraiberkleid.xyz/blueorgreen"
 #          value: "http://blueorgreen-svc:8080"
-#          value: "http://blueorgreen-svc.blueorgreen-istio-2.svc.cluster.local:8080"
+#          value: "http://blueorgreen-svc.blueorgreen-istio.svc.cluster.local:8080"
         resources: {}
         imagePullPolicy: Always
 ---
@@ -46,12 +46,12 @@ spec:
         app: blueorgreen-gw
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-authgateway
+      - image: ciberkleid/s1p-2020-mesh-authgateway
         name: app
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "istio"
         - name: COLOR_APPLICATION_URL
-          value: "http://blueorgreen.marygabry.name"
+          value: "http://blueorgreen.springone.coraiberkleid.xyz"
         resources: {}
         imagePullPolicy: Always

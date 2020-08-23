@@ -23,16 +23,14 @@ public class ColorController {
 	public Color color() throws InterruptedException {
 		log.info("Got request for " + colorProperties.getColor());
 		if(colorProperties.isSlow()) {
-			log.info("Sleeping for " + colorProperties.getDelay() + "ms...");
-			Thread.sleep(colorProperties.getDelay());
+			log.info("Sleeping for 5s...");
+			Thread.sleep(5000);
 		}
 		log.info("Sending response for " + colorProperties.getColor());
 		if(Color.BLUE.getId().equalsIgnoreCase(colorProperties.getColor())) {
 			return Color.BLUE;
 		} else if(Color.YELLOW.getId().equalsIgnoreCase(colorProperties.getColor())) {
 			return Color.YELLOW;
-		} else if(Color.ORANGE.getId().equalsIgnoreCase(colorProperties.getColor())) {
-			return Color.ORANGE;
 		}
 		return Color.GREEN;
 	}
@@ -41,7 +39,6 @@ public class ColorController {
 		public static final Color GREEN = new Color("green");
 		public static final Color BLUE = new Color("blue");
 		public static final Color YELLOW = new Color("yellow");
-		public static final Color ORANGE = new Color("orange");
 		private String id;
 
 		public Color(){}

@@ -12,12 +12,6 @@ public class ColorProperties {
 
 	private boolean slow = false;
 
-	private int delay = 5000;
-
-	public int getDelay() { return delay; }
-
-	public void setDelay(int delay) { this.delay = delay; }
-
 	public boolean isSlow() {
 		return slow;
 	}

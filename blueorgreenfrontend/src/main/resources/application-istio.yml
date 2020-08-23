@@ -7,13 +7,15 @@ eureka:
     fetch-registry: false
     enabled: false
 
-colorServiceUrl: ${COLOR_SERVICE_URL}
-
 ribbon:
   eureka:
     enabled: false
   http:
     client:
       enabled: true
-  ReadTimeout: 60000
-  ConnectTimeout: 30000
+  # Default ReadTimeout=5000, ConnectTimeout=2000. Adding 5s to each for demo.
+  # https://github.com/Netflix/ribbon/blob/master/ribbon-core/src/main/java/com/netflix/client/config/CommonClientConfigKey.java#L103
+  ReadTimeout: 10000
+  ConnectTimeout: 7000
+
+colorServiceUrl: ${COLOR_SERVICE_URL}

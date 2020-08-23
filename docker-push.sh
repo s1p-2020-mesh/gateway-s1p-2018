@@ -1,6 +1,6 @@
 #!/bin/bash
 
-registry=marygabry1508
+registry=ciberkleid
 #gwTag="cb-NONE"
 #gwTag="cb-TIMEOUT"
 gwTag="cb-FALLBACK"
@@ -20,10 +20,10 @@ done
 
 #for app in "${apps[@]}"
 #do
-#  if [[ $app = "blueorgreengateway" ]]; then
-##    echo "Tagging $app as $gwTag. Continue? [yN]: "
-##    read cont
-#    if [ $cont = "Y" ] || [ $cont = "y" ]; then
+#  if [[ "${app}" = "blueorgreengateway" ]]; then
+#    echo "Tagging $app as $gwTag. Continue? [yN]: "
+#    read cont
+#    if [ "${cont}" = "Y" ] || [ "${cont}" = "y" ]; then
 #      docker tag $app $app:$gwTag
 #      docker tag $app $registry/s1p-2020-mesh-$app:$gwTag
 #      docker push $registry/s1p-2020-mesh-$app:$gwTag

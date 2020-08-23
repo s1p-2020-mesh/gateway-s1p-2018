@@ -17,7 +17,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: blueorgreen-istio-2
+    namespace: blueorgreen-istio
 roleRef:
   kind: ClusterRole
   name: cluster-read-role

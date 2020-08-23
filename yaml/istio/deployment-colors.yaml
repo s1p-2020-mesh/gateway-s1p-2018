@@ -21,17 +21,13 @@ spec:
         access: basic
     spec:
       containers:
-      - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
+      - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
         name: app
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: "istio"
         - name: COLOR
           value: "blue"
-        - name: SLOW
-          value: "false"
-        - name: DELAY
-          value: "5000"
         resources: {}
         imagePullPolicy: Always
 ---
@@ -58,7 +54,40 @@ spec:
         access: basic
     spec:
       containers:
-        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
+          name: app
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "istio"
+            - name: COLOR
+              value: "green"
+          resources: {}
+          imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slowgreen
+  labels:
+    app: blueorgreen-svc
+    apptype: slowgreen
+    access: basic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blueorgreen-svc
+      apptype: slowgreen
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blueorgreen-svc
+        apptype: slowgreen
+        access: basic
+    spec:
+      containers:
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
           name: app
           env:
             - name: SPRING_PROFILES_ACTIVE
@@ -66,46 +95,9 @@ spec:
             - name: COLOR
               value: "green"
             - name: SLOW
-              value: "false"
-            - name: DELAY
-              value: "5000"
+              value: "true"
           resources: {}
           imagePullPolicy: Always
-#---
-#apiVersion: apps/v1
-#kind: Deployment
-#metadata:
-#  name: orange
-#  labels:
-#    app: blueorgreen-svc
-#    apptype: orange
-#spec:
-#  replicas: 1
-#  selector:
-#    matchLabels:
-#      app: blueorgreen-svc
-#      apptype: orange
-#  strategy: {}
-#  template:
-#    metadata:
-#      labels:
-#        app: blueorgreen-svc
-#        apptype: orange
-#    spec:
-#      containers:
-#        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
-#          name: app
-#          env:
-#            - name: SPRING_PROFILES_ACTIVE
-#              value: "istio"
-#            - name: COLOR
-#              value: "orange"
-#            - name: SLOW
-#              value: "false"
-#            - name: DELAY
-#              value: "5000"
-#          resources: {}
-#          imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -128,16 +120,12 @@ spec:
         apptype: yellow
     spec:
       containers:
-        - image: marygabry1508/s1p-2020-mesh-blueorgreenservice
+        - image: ciberkleid/s1p-2020-mesh-blueorgreenservice
           name: app
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "istio"
             - name: COLOR
               value: "yellow"
-            - name: SLOW
-              value: "false"
-            - name: DELAY
-              value: "5000"
           resources: {}
           imagePullPolicy: Always
