@@ -19,5 +19,4 @@ find ./yaml -type f \( -name "*.yaml" -o -name "*.yml" \) -print0 | xargs -0 sed
 
 sed -i '' "s/${FROM_REG}/${TO_REG}/g" docker-push.sh
 
-sed -i '' "s/${FROM_DMN}/${TO_DMN}/g" test.sh
 sed -i '' "s/${FROM_DMN}/${TO_DMN}/g" istio-demo-steps.sh
